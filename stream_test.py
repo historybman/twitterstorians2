@@ -3,8 +3,7 @@ import sqlite3
 from TwitterAPI import TwitterAPI
 from TwitterAPI import TwitterRestPager
 import datetime 
-# insert API here
-
+from api import api
 
 
 #r = api.request('search/tweets', {'q': '#twitterstorians'})
@@ -19,8 +18,11 @@ cur = conn.cursor()
 
 cur.execute('DROP TABLE IF EXISTS tweets')
 cur.execute('CREATE TABLE tweets(user TEXT, tweet TEXT, date TEXT)')
+cur.execute('DROP TABLE IF EXISTS users')
+cur.execute('CREATE TABLE IF NOT EXISTS users(user_id INTEGER NOT NULL, user TEXT UNIQUE, PRIMARY KEY(user_id))')
 
 count = 0
+
 
 for item in b.get_iterator():
     user1 = item['user']['screen_name']
@@ -32,9 +34,11 @@ for item in b.get_iterator():
     print(user1, date1)
     cur.execute('INSERT INTO tweets (user, tweet, date) VALUES (?, ?, ?)', (user1, tweet1, date1))
     conn.commit()
+    cur.execute('INSERT OR IGNORE INTO users (user) VALUES (?)', (user1, ))
+    conn.commit()
     count += 1
     print(count)
-    if count < 1500:
+    if count < 200:
         continue
     else:
         break
