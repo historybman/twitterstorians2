@@ -45,3 +45,10 @@ for item in b.get_iterator():
 
  
 print('the end!')
+
+## Next moves: use RE to parse twitter handles in tweets and add those to users
+    # important to find out whether there's a way to do this within twitter api json
+    
+# Then make a third table which is contacts, which will store connections
+# from tweeter to tweeted. 
+# maybe isolate the retweets and do those separately
