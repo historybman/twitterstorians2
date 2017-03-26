@@ -1,7 +1,6 @@
 import json
 from TwitterAPI import TwitterAPI
-api = TwitterAPI("gYaQqLlPplMjAuDWk5krCjV4W", "SbmqAT4XiVbvJ3pbDlkG15s4G9HzcRK2RVcDbXdoqi4ieDwO1X",
-	"437803182-oC6F7n34TKPNgJ0hkEDSJ94ZDt1O2dcjKuYqbjpu", "vVagdZXd9S7czx6m5r4E4qmWiyreSMLRSIfnDnXv2ziUg")
+
 
 r = api.request('search/tweets', {'q': '#twitterstorians'})
 # for item in r:
